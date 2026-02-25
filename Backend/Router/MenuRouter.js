@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const upload = require("../middleware/upload"); 
+const upload = require("../middleware/UploadImage"); 
 const {
     CreateMenuItem,
     GetAllMenuItems,
@@ -8,6 +8,7 @@ const {
     UpdateMenuItem,
     DeleteMenuItem
 } = require("../Controller/MenuController");
+
 
 router.post("/", upload.single("image"), CreateMenuItem);
 router.get("/", GetAllMenuItems);
