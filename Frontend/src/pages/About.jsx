@@ -1,14 +1,13 @@
 import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { Utensils, Users, Award, Clock, Heart, ShieldCheck, Globe, Zap } from "lucide-react";
+import { Utensils, Users, Award, Clock, Heart, ShieldCheck, Globe, Zap, Search } from "lucide-react";
 
 function About() {
     return (
         <div className="min-h-screen bg-white">
             <Header />
 
-            {/* Hero Section */}
             <div className="pt-32 pb-20 px-6 bg-gray-50 overflow-hidden relative">
                 <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div className="relative z-10">
@@ -34,11 +33,10 @@ function About() {
                                 className="w-full h-full object-cover"
                             />
                         </div>
-                        {/* Decorative floating card */}
                         <div className="absolute -bottom-10 -left-10 bg-white p-6 rounded-3xl shadow-xl border border-gray-100 hidden md:block animate-bounce-slow">
                             <div className="flex items-center gap-4">
                                 <div className="p-3 bg-green-100 text-green-600 rounded-2xl">
-                                    <shieldCheck size={24} />
+                                    <ShieldCheck size={24} />
                                 </div>
                                 <div>
                                     <p className="font-black text-gray-900 text-lg">100% Verified</p>
@@ -50,36 +48,35 @@ function About() {
                 </div>
             </div>
 
-            {/* Mission & Values */}
             <div className="py-32 px-6 max-w-7xl mx-auto">
                 <div className="text-center mb-24">
                     <h2 className="text-4xl font-black text-gray-900 mb-4 tracking-tight uppercase">Why Choose LocalFood?</h2>
-                    <p className="text-gray-400 font-medium max-w-2xl mx-auto">Waxaan ahayn kuwo ka duwan inta kale, waayo waxaan qiimaynaynaa tayada iyo raaxada macaamiisheena.</p>
+                    <p className="text-gray-400 font-medium max-w-2xl mx-auto">We are different from the rest because we value the quality and comfort of our customers.</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {[
                         {
-                            title: "Tayada Cuntada",
-                            desc: "Waxaan la shaqaynaa makhaayadaha ugu magaca dheer ee bixiya cuntada ugu macaan uguna tayada badan.",
+                            title: "Food Quality",
+                            desc: "We partner with the most reputable restaurants that provide the most delicious and highest quality food.",
                             icon: Utensils,
                             color: "bg-blue-500"
                         },
                         {
-                            title: "Gaarsiin Degdeg ah",
-                            desc: "Dalabkaaga wuxuu kugu soo gaarayaa waqti aad u gaaban, isagoo kulul oo diyaar ah.",
-                            icon: Zap,
+                            title: "Local Food Finder",
+                            desc: "Welcome! Discover the best hidden gems and traditional tastes right in your neighborhood with ease.",
+                            icon: Search,
                             color: "bg-orange-500"
                         },
                         {
-                            title: "Amman Buuxa",
-                            desc: "Xogtaada iyo bixinta lacagtaadu waa mid si weyn loo ilaaliyo oo ammaan ah.",
+                            title: "Full Security",
+                            desc: "Your data and payment transactions are highly protected and secure.",
                             icon: ShieldCheck,
                             color: "bg-green-500"
                         },
                         {
-                            title: "Taageero 24/7",
-                            desc: "Kooxdayada taageerada macaamiisha waxay diyaar u yihiin inay ku caawiyaan saacad kasta.",
+                            title: "24/7 Support",
+                            desc: "Our customer support team is available to assist you at any hour of the day.",
                             icon: Clock,
                             color: "bg-purple-500"
                         }
@@ -97,7 +94,6 @@ function About() {
                 </div>
             </div>
 
-            {/* Stats Section */}
             <div className="bg-gray-900 py-32 px-6 relative overflow-hidden">
                 <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-2 md:grid-cols-4 gap-12 text-center text-white">
                     <div>
@@ -117,13 +113,11 @@ function About() {
                         <p className="text-sm font-black text-gray-400 uppercase tracking-widest">User Rating</p>
                     </div>
                 </div>
-                {/* Decorative background effects */}
                 <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
                     <Globe size={800} className="text-gray-400 -ml-[400px] -mt-[400px]" />
                 </div>
             </div>
 
-            {/* Our Vision */}
             <div className="py-32 px-6 max-w-7xl mx-auto flex flex-col lg:flex-row gap-20 items-center">
                 <div className="flex-1 grid grid-cols-2 gap-6">
                     <div className="space-y-6">
@@ -133,14 +127,14 @@ function About() {
                         <div className="p-10 bg-orange-600 rounded-3xl text-white">
                             <Heart size={40} className="mb-4" />
                             <h4 className="text-2xl font-black tracking-tight mb-2">Passion for Food</h4>
-                            <p className="text-sm font-bold opacity-80">Waxaan jecelnahay cuntada macaan.</p>
+                            <p className="text-sm font-bold opacity-80">We love delicious food.</p>
                         </div>
                     </div>
                     <div className="space-y-6 pt-12">
                         <div className="p-10 bg-gray-900 rounded-3xl text-white">
                             <Users size={40} className="mb-4 text-orange-500" />
                             <h4 className="text-2xl font-black tracking-tight mb-2">Community First</h4>
-                            <p className="text-sm font-bold opacity-80">Dadkeena ayaan u adeegnaa.</p>
+                            <p className="text-sm font-bold opacity-80">We serve our people.</p>
                         </div>
                         <div className="h-64 bg-gray-100 rounded-3xl overflow-hidden shadow-xl border-4 border-white">
                             <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&q=80&w=1000" className="w-full h-full object-cover" />
@@ -152,9 +146,9 @@ function About() {
                         Our Vision for <br />the <span className="text-orange-600">Future</span>
                     </h3>
                     <p className="text-gray-500 font-medium text-lg leading-relaxed mb-8">
-                        LocalFood maahan kaliya meel cunto laga dalbado, waa nidaam isku xira koboca dhaqaalaha
-                        yar-yar ee magaalada iyo baahida macaamiisha. Hiigsiigayagu waa inaan ballaarinno adeegga
-                        inaan gaadhno gobollada dalka oo dhan, innagoo adeegsanayna tignoolajiyada ugu dambeysa.
+                        LocalFood is not just a place to order food; it is a system that connects the growth of 
+                        local small businesses with customer needs. Our vision is to expand our services 
+                        to reach all regions across the country, utilizing the latest technology.
                     </p>
                     <button className="flex items-center gap-3 px-10 py-5 bg-orange-600 text-white rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-orange-700 hover:scale-105 transition-all shadow-xl shadow-orange-100">
                         Join Our Journey <Award size={18} />
@@ -162,7 +156,7 @@ function About() {
                 </div>
             </div>
 
-        
+         
         </div>
     );
 }
