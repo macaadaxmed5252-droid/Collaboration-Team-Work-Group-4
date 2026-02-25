@@ -1,13 +1,12 @@
-const contuctmodel = require("../Model/Contuct");
+const Contact = require("../Model/Contuct"); // Make sure filename is correct
 
 const Create = async (req, res) => {
   try {
-    const newItem = await contuctmodel.create({
+    const newItem = await Contact.create({
       name: req.body.name,
-      message: req.body.message,
       email: req.body.email,
+      message: req.body.message,
     });
-
     res.status(201).json(newItem);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -16,7 +15,7 @@ const Create = async (req, res) => {
 
 const GetUsers = async (req, res) => {
   try {
-    const read = await contuctmodel.find();
+    const read = await Contact.find();
     res.status(200).json(read);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -25,7 +24,7 @@ const GetUsers = async (req, res) => {
 
 const GetUserById = async (req, res) => {
   try {
-    const readById = await contuctmodel.findById(req.params.id);
+    const readById = await Contact.findById(req.params.id);
 
     if (!readById) {
       return res.status(404).json({ message: "User not found" });
@@ -39,7 +38,7 @@ const GetUserById = async (req, res) => {
 
 const DeleteUser = async (req, res) => {
   try {
-    const deleted = await contuctmodel.findByIdAndDelete(req.params.id);
+    const deleted = await Contact.findByIdAndDelete(req.params.id);
 
     if (!deleted) {
       return res.status(404).json({ message: "User not found" });

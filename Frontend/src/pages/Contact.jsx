@@ -6,7 +6,7 @@ const Contact = () => {
   const [contact, setContact] = useState({ name: "", email: "", message: "" });
   const [success, setSuccess] = useState("");
 
-  const handleChange = (e) => {
+  const handlechange = (e) => {
     const { name, value } = e.target;
     setContact({ ...contact, [name]: value });
   };
@@ -14,12 +14,12 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:3000/contact", contact);
-      setSuccess("Message sent successfully!");
+      await axios.post("http://localhost:3000/contuct", contact);
+      alert("Message sent successfully!");
       setContact({ name: "", email: "", message: "" });
     } catch (err) {
       console.error(err);
-      setSuccess("Failed to send message");
+      alert("Failed to send message");
     }
   };
 
@@ -117,7 +117,7 @@ const Contact = () => {
                   name={field}
                   placeholder={field === "name" ? "Enter your name" : "email@example.com"}
                   value={contact[field]}
-                  onChange={handleChange}
+                  onChange={handlechange}
                   required
                   className="w-full px-5 py-3 bg-gray-50 border border-gray-300 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 outline-none transition text-gray-700 placeholder:text-gray-400 rounded-lg shadow-sm"
                 />
@@ -131,7 +131,7 @@ const Contact = () => {
                 rows="5"
                 placeholder="How can we help you?"
                 value={contact.message}
-                onChange={handleChange}
+                onChange={handlechange}
                 required
                 className="w-full px-5 py-3 bg-gray-50 border border-gray-300 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 outline-none transition text-gray-700 placeholder:text-gray-400 resize-none rounded-lg shadow-sm"
               ></textarea>
