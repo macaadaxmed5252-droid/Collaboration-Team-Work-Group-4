@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { Edit3, Trash2, MapPin, Tag, Utensils, Plus, Loader2, MoreHorizontal } from 'lucide-react';
+import api, { IMAGE_BASE_URL } from '../api/config';
 
 function ManageRestaurant() {
     const [restaurants, setRestaurants] = useState([]);
@@ -11,8 +11,8 @@ function ManageRestaurant() {
 
     const GetAllResturents = async () => {
         try {
-            const res = await axios.get("http://localhost:3000/Resturant");
-            setRestaurants(res.data.data || res.data);
+            const res = await api.get("/Resturant");
+            setRestaurants(res.data);
         } catch (err) {
             console.log("Error fetching restaurants", err);
         } finally {
@@ -33,7 +33,7 @@ function ManageRestaurant() {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    await axios.delete(`http://localhost:3000/Resturant/${id}`);
+                    await api.delete(`/Resturant/${id}`);
                     setRestaurants(restaurants.filter(r => r._id !== id));
                     Swal.fire('La tirtiray!', 'Makhaayadda waa la saaray.', 'success');
                 } catch (err) {
@@ -55,7 +55,7 @@ function ManageRestaurant() {
                     <h1 className="text-3xl font-black text-gray-900 tracking-tight">Restaurant Fleet</h1>
                     <p className="text-gray-500 font-medium">Maamul dhammaan makhaayadahaaga hal meel.</p>
                 </div>
-                <button 
+                <button
                     onClick={() => navigate('/admin/create-restaurant')}
                     className="flex items-center justify-center gap-2 bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-2xl font-bold transition-all shadow-lg shadow-orange-200 active:scale-95"
                 >
@@ -88,8 +88,8 @@ function ManageRestaurant() {
                                     <td className="px-6 py-4 first:rounded-l-2xl border-y border-l border-gray-50 group-hover:border-orange-100">
                                         <div className="flex items-center gap-4">
                                             <div className="relative w-14 h-14 shrink-0">
-                                                <img 
-                                                    src={rest.Image ? `http://localhost:3000/Images/${rest.Image}` : "https://via.placeholder.com/100"} 
+                                                <img
+                                                    src={rest.Image ? `${IMAGE_BASE_URL}${rest.Image}` : "https://via.placeholder.com/100"}
                                                     className="w-full h-full object-cover rounded-2xl shadow-sm border border-gray-100"
                                                     alt={rest.name}
                                                 />
@@ -122,13 +122,13 @@ function ManageRestaurant() {
                                     {/* Actions Column */}
                                     <td className="px-6 py-4 last:rounded-r-2xl border-y border-r border-gray-50 group-hover:border-orange-100 text-right">
                                         <div className="flex items-center justify-end gap-3">
-                                            <button 
-    onClick={() => navigate(`/admin/edit-restaurant/${rest._id}`)} // ✅ Halkan ku dar '-' u dhexeeya edit iyo restaurant
-    className="p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all duration-300"
->
-    <Edit3 size={18} />
-</button>
-                                            <button 
+                                            <button
+                                                onClick={() => navigate(`/admin/edit-restaurant/${rest._id}`)}
+                                                className="p-3 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all duration-300"
+                                            >
+                                                <Edit3 size={18} />
+                                            </button>
+                                            <button
                                                 onClick={() => deleteRestaurant(rest._id)}
                                                 className="p-3 bg-red-50 text-red-600 rounded-xl hover:bg-red-600 hover:text-white transition-all duration-300"
                                             >

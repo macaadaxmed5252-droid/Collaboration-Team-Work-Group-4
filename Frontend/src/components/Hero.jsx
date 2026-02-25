@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Search, MapPin } from "lucide-react";
-import axios from "axios";
+import api from "../api/config";
 
 function Hero({ onSearch }) {
     const [searchName, setSearchName] = useState("");
@@ -11,7 +11,7 @@ function Hero({ onSearch }) {
     useEffect(() => {
         const fetchLocations = async () => {
             try {
-                const res = await axios.get("http://localhost:3000/Resturant/");
+                const res = await api.get("/Resturant");
                 const cities = [...new Set(res.data.map((item) => item.location))];
                 setLocations(cities);
             } catch (error) {

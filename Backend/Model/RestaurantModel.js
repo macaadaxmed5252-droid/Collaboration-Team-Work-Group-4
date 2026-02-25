@@ -7,7 +7,8 @@ const restaurantSchema = new mongoose.Schema({
     city: { type: String, required: true },
     category: { type: String, required: true },
     Image: { type: String, required: true }, 
-    averageRating: { type: Number, default: 0 }
+    averageRating: { type: Number, default: 0 },
+    openingHours: { type: String, default: "9:00 AM - 10:00 PM" }
 });
 
 const RestaurantModel = mongoose.model("Restaurant", restaurantSchema);

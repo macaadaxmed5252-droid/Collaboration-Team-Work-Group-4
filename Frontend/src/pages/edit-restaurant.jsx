@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from "axios";
 import { useParams, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { Save, ArrowLeft, Upload, Utensils, MapPin, Tag, Info, Building2 } from 'lucide-react';
+import api, { IMAGE_BASE_URL } from '../api/config';
 
 function EditRestaurant() {
     const { id } = useParams();
@@ -21,8 +21,8 @@ function EditRestaurant() {
     useEffect(() => {
         const getSingleResturent = async () => {
             try {
-                const res = await axios.get(`http://localhost:3000/Resturant/${id}`);
-                const data = res.data.data || res.data;
+                const res = await api.get(`/Resturant/${id}`);
+                const data = res.data;
                 setUpdate({
                     name: data.name,
                     description: data.description,
@@ -32,7 +32,7 @@ function EditRestaurant() {
                     Image: data.Image
                 });
                 if (data.Image) {
-                    setPreview(`http://localhost:3000/Images/${data.Image}`);
+                    setPreview(`${IMAGE_BASE_URL}${data.Image}`);
                 }
             } catch (err) {
                 console.log("Error fetching restaurant", err);
@@ -65,8 +65,8 @@ function EditRestaurant() {
         formData.append("Image", Update.Image);
 
         try {
-            await axios.put(`http://localhost:3000/Resturant/${id}`, formData);
-            
+            await api.put(`/Resturant/${id}`, formData);
+
             Swal.fire({
                 title: 'Waa la guulaystay!',
                 text: 'Xogta makhaayadda waa la cusboonaysiiyay.',
@@ -88,7 +88,7 @@ function EditRestaurant() {
                 {/* Header Area */}
                 <div className="flex items-center justify-between mb-8">
                     <div>
-                        <button 
+                        <button
                             onClick={() => navigate(-1)}
                             className="flex items-center gap-2 text-gray-500 hover:text-orange-600 transition-colors font-bold mb-2"
                         >
@@ -114,10 +114,10 @@ function EditRestaurant() {
                                             <span className="text-xs font-bold mt-2">Upload Image</span>
                                         </div>
                                     )}
-                                    <input 
-                                        type="file" 
-                                        name="Image" 
-                                        onChange={handleChange} 
+                                    <input
+                                        type="file"
+                                        name="Image"
+                                        onChange={handleChange}
                                         className="absolute inset-0 opacity-0 cursor-pointer"
                                     />
                                 </div>
@@ -137,10 +137,10 @@ function EditRestaurant() {
                                     <label className="flex items-center gap-2 text-sm font-black text-gray-700 uppercase tracking-tighter">
                                         <Utensils size={16} className="text-orange-500" /> Restaurant Name
                                     </label>
-                                    <input 
-                                        type="text" 
-                                        name="name" 
-                                        value={Update.name} 
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        value={Update.name}
                                         onChange={handleChange}
                                         className="w-full p-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-orange-500/20 transition-all font-bold text-gray-900"
                                         placeholder="Tusaale: C plus"
@@ -153,10 +153,10 @@ function EditRestaurant() {
                                     <label className="flex items-center gap-2 text-sm font-black text-gray-700 uppercase tracking-tighter">
                                         <Tag size={16} className="text-blue-500" /> Category
                                     </label>
-                                    <input 
-                                        type="text" 
-                                        name="category" 
-                                        value={Update.category} 
+                                    <input
+                                        type="text"
+                                        name="category"
+                                        value={Update.category}
                                         onChange={handleChange}
                                         className="w-full p-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500/20 transition-all font-bold text-gray-900"
                                         placeholder="Fast Food"
@@ -168,10 +168,10 @@ function EditRestaurant() {
                                     <label className="flex items-center gap-2 text-sm font-black text-gray-700 uppercase tracking-tighter">
                                         <Building2 size={16} className="text-purple-500" /> City
                                     </label>
-                                    <input 
-                                        type="text" 
-                                        name="city" 
-                                        value={Update.city} 
+                                    <input
+                                        type="text"
+                                        name="city"
+                                        value={Update.city}
                                         onChange={handleChange}
                                         className="w-full p-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-purple-500/20 transition-all font-bold text-gray-900"
                                         placeholder="Mogadishu"
@@ -183,10 +183,10 @@ function EditRestaurant() {
                                     <label className="flex items-center gap-2 text-sm font-black text-gray-700 uppercase tracking-tighter">
                                         <MapPin size={16} className="text-red-500" /> Exact Location
                                     </label>
-                                    <input 
-                                        type="text" 
-                                        name="location" 
-                                        value={Update.location} 
+                                    <input
+                                        type="text"
+                                        name="location"
+                                        value={Update.location}
                                         onChange={handleChange}
                                         className="w-full p-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-red-500/20 transition-all font-bold text-gray-900"
                                         placeholder="Maka al Mukarama"
@@ -198,10 +198,10 @@ function EditRestaurant() {
                                     <label className="flex items-center gap-2 text-sm font-black text-gray-700 uppercase tracking-tighter">
                                         <Info size={16} className="text-green-500" /> Description
                                     </label>
-                                    <textarea 
+                                    <textarea
                                         rows="4"
-                                        name="description" 
-                                        value={Update.description} 
+                                        name="description"
+                                        value={Update.description}
                                         onChange={handleChange}
                                         className="w-full p-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-green-500/20 transition-all font-bold text-gray-900 resize-none"
                                         placeholder="Ka sheekee makhaayaddaada..."
@@ -211,9 +211,9 @@ function EditRestaurant() {
                         </div>
 
                         {/* Submit Button */}
-                        <button 
+                        <button
                             disabled={loading}
-                            type="submit" 
+                            type="submit"
                             className="w-full bg-orange-600 hover:bg-orange-700 text-white p-5 rounded-2xl font-black text-lg transition-all shadow-lg shadow-orange-200 flex items-center justify-center gap-3 active:scale-95 disabled:opacity-50"
                         >
                             {loading ? "Cusboonaysiin..." : <><Save size={24} /> Update Restaurant Details</>}

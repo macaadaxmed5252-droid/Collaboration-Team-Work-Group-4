@@ -71,4 +71,36 @@ const GetAllUsers = async (req, res) => {
     }
 }
 
-module.exports = { CreateUser, UpdateUser, LoginUser, DeleteUser, GetAllUsers };
+const ToggleFavorite = async (req, res) => {
+    try {
+        const { userId, restaurantId } = req.body;
+        const user = await UserModel.findById(userId);
+        if (!user) return res.status(404).json({ message: "User not found" });
+
+        const index = user.favorites.indexOf(restaurantId);
+        if (index === -1) {
+            user.favorites.push(restaurantId);
+            await user.save();
+            res.status(200).json({ message: "Added to favorites", favorites: user.favorites });
+        } else {
+            user.favorites.splice(index, 1);
+            await user.save();
+            res.status(200).json({ message: "Removed from favorites", favorites: user.favorites });
+        }
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+}
+
+const GetFavorites = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user = await UserModel.findById(id).populate("favorites");
+        if (!user) return res.status(404).json({ message: "User not found" });
+        res.status(200).json(user.favorites);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+}
+
+module.exports = { CreateUser, UpdateUser, LoginUser, DeleteUser, GetAllUsers, ToggleFavorite, GetFavorites };

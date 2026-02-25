@@ -5,7 +5,7 @@ const RestaurantModel = require("../Model/RestaurantModel");
 const CreateReview = async (req, res) => {
     try {
         // userId-ga waxaan ka soo qaadanaynaa body-ga si looga fogaado error-ka 'undefined'
-        const { restaurantId, rating, comment, userId } = req.body; 
+        const { restaurantId, rating, comment, userId } = req.body;
 
         if (!userId) {
             return res.status(400).json({ message: "Fadlan soo geli userId-ga qofka review-ga qoraya" });
@@ -77,4 +77,15 @@ const DeleteReview = async (req, res) => {
     }
 };
 
-module.exports = { CreateReview, GetReviewsByRestaurant, DeleteReview };
+const GetAllReviews = async (req, res) => {
+    try {
+        const reviews = await ReviewModel.find()
+            .populate("userId", "fullName email")
+            .populate("restaurantId", "name");
+        res.status(200).json(reviews);
+    } catch (err) {
+        res.status(500).json({ error: "Cilad ayaa dhacday", details: err.message });
+    }
+};
+
+module.exports = { CreateReview, GetReviewsByRestaurant, DeleteReview, GetAllReviews };

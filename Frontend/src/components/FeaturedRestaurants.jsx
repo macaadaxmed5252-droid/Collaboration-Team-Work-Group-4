@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MapPin, Star, ArrowRight } from 'lucide-react';
-import axios from 'axios';
+import { Link } from 'react-router-dom';
+import api, { IMAGE_BASE_URL } from '../api/config';
 
 function FeaturedRestaurants({ searchTerms }) {
     const [allRestaurants, setAllRestaurants] = useState([]);
@@ -10,7 +11,7 @@ function FeaturedRestaurants({ searchTerms }) {
     useEffect(() => {
         const fetchAll = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/Resturant/');
+                const response = await api.get('/Resturant');
                 setAllRestaurants(response.data);
                 setFilteredData(response.data);
                 setLoading(false);
@@ -53,18 +54,22 @@ function FeaturedRestaurants({ searchTerms }) {
                         {filteredData.length} restaurants found.
                     </p>
                 </div>
-                <button className="flex items-center text-orange-600 font-bold group">
+                <Link to="/resturents" className="flex items-center text-orange-600 font-bold group">
                     View all <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </button>
+                </Link>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 items-stretch">
                 {filteredData.length > 0 ? (
                     filteredData.map((res) => (
-                        <div key={res._id} className="group bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-50 flex flex-col h-full">
+                        <Link
+                            to={`/restaurant/${res._id}`}
+                            key={res._id}
+                            className="group bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-50 flex flex-col h-full"
+                        >
                             <div className="relative aspect-[4/3] overflow-hidden bg-gray-100 flex-none">
                                 <img
-                                    src={`http://localhost:3000/Images/${res.Image}`}
+                                    src={`${IMAGE_BASE_URL}${res.Image}`}
                                     alt={res.name}
                                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                     onError={(e) => e.target.src = 'https://via.placeholder.com/600x400?text=Image+Not+Found'}
@@ -79,7 +84,7 @@ function FeaturedRestaurants({ searchTerms }) {
                                         <div className="flex items-center bg-orange-50 px-3 py-1.5 rounded-full flex-none">
                                             <Star className="w-3.5 h-3.5 text-orange-500 fill-current mr-1.5" />
                                             <span className="font-bold text-orange-700 text-sm">
-                                                {res.averageRating || "0.0"}
+                                                {res.averageRating?.toFixed(1) || "0.0"}
                                             </span>
                                         </div>
                                     </div>
@@ -88,8 +93,14 @@ function FeaturedRestaurants({ searchTerms }) {
                                         <p className="text-sm line-clamp-1">{res.location}, {res.city}</p>
                                     </div>
                                 </div>
+                                <div className="mt-6 pt-6 border-t border-gray-50 flex items-center justify-between">
+                                    <span className="text-xs font-black text-gray-400 uppercase tracking-widest">Detail & Menu</span>
+                                    <div className="p-2 bg-gray-50 rounded-lg text-gray-400 group-hover:bg-orange-600 group-hover:text-white transition-all">
+                                        <ArrowRight size={18} />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </Link>
                     ))
                 ) : (
                     <div className="col-span-full text-center py-20 bg-gray-50 rounded-[2.5rem]">

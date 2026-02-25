@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../api/config";
 import Swal from "sweetalert2";
 import { Utensils, MapPin, Building2, Tag, AlignLeft, ImagePlus, Loader2 } from "lucide-react";
+
 function CreateRestaurant() {
     const [formData, setFormData] = useState({
         name: "",
@@ -23,7 +24,7 @@ function CreateRestaurant() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         if (!image) {
             return Swal.fire("Error", "Fadlan sawirka soo geli", "error");
         }
@@ -39,7 +40,7 @@ function CreateRestaurant() {
         data.append("Image", image);
 
         try {
-            const response = await axios.post("http://localhost:3000/Resturant", data, {
+            const response = await api.post("/Resturant", data, {
                 headers: { "Content-Type": "multipart/form-data" }
             });
 

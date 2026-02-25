@@ -1,7 +1,33 @@
-import React from "react";
-import { UtensilsCrossed, Facebook, Instagram, Twitter, Mail } from 'lucide-react';
+import React, { useState } from "react";
+import { UtensilsCrossed, Facebook, Instagram, Twitter, Mail, Loader2, Send } from 'lucide-react';
+import api from "../api/config";
+import Swal from "sweetalert2";
 
 function Footer() {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email) return;
+    setLoading(true);
+    try {
+      await api.post("/Subscription", { email });
+      Swal.fire({
+        title: "Guul!",
+        text: "Waad ku mahadsantahay is diiwaangelintaada!",
+        icon: "success",
+        timer: 2000,
+        showConfirmButton: false
+      });
+      setEmail("");
+    } catch (err) {
+      Swal.fire("Cilad!", err.response?.data?.message || "Cilad ayaa dhacday", "error");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <footer className="bg-[#0f0f14] text-gray-300 mt-20">
       {/* Newsletter Section */}
@@ -13,28 +39,35 @@ function Footer() {
           Sign up to receive discounts and updates on new restaurants.
         </p>
 
-        <div className="mt-8 flex justify-center max-w-md mx-auto">
+        <form onSubmit={handleSubscribe} className="mt-8 flex justify-center max-w-md mx-auto">
           <div className="relative w-full flex">
-             <input
+            <input
               type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email address..."
               className="px-5 py-4 w-full bg-gray-900 border border-gray-800 rounded-l-2xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm transition-all"
             />
-            <button className="bg-orange-600 hover:bg-orange-700 px-8 py-4 rounded-r-2xl text-white text-sm font-black transition-all shadow-lg shadow-orange-900/20 active:scale-95">
-              Subscribe
+            <button
+              disabled={loading}
+              type="submit"
+              className="bg-orange-600 hover:bg-orange-700 px-8 py-4 rounded-r-2xl text-white text-sm font-black transition-all shadow-lg shadow-orange-900/20 active:scale-95 disabled:bg-gray-700"
+            >
+              {loading ? <Loader2 className="animate-spin" size={20} /> : "Subscribe"}
             </button>
           </div>
-        </div>
+        </form>
       </div>
 
       {/* Links Section */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 py-16 px-6 text-sm">
-        
+
         {/* Brand Section */}
         <div className="space-y-4">
           <div className="flex items-center gap-2">
             <div className="bg-orange-500 p-2 rounded-xl">
-               <UtensilsCrossed className="text-white" size={24} />
+              <UtensilsCrossed className="text-white" size={24} />
             </div>
             <h3 className="text-white text-2xl font-black tracking-tighter">
               Local<span className="text-orange-500">Food</span>
@@ -43,7 +76,7 @@ function Footer() {
           <p className="text-gray-400 leading-relaxed font-medium">
             Bringing you the authentic flavors of your community. Order quality food from the comfort of your home.
           </p>
-          
+
           {/* Functional Social Icons */}
           <div className="flex gap-4 pt-2">
             <a href="https://facebook.com/kingMaalid" target="_blank" rel="noopener noreferrer" className="hover:text-orange-500 transition-colors">
@@ -64,7 +97,7 @@ function Footer() {
         <div>
           <h4 className="text-white font-bold text-base mb-6 border-l-4 border-orange-500 pl-3">Explore</h4>
           <ul className="space-y-3 font-medium">
-            <li><a href="#" className="hover:text-orange-500 transition-colors">Browse Restaurants</a></li>
+            <li><a href="/resturents" className="hover:text-orange-500 transition-colors">Browse Restaurants</a></li>
             <li><a href="#" className="hover:text-orange-500 transition-colors">Popular Foods</a></li>
             <li><a href="#" className="hover:text-orange-500 transition-colors">Special Offers</a></li>
             <li><a href="#" className="hover:text-orange-500 transition-colors">Discounts</a></li>
