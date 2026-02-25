@@ -1,33 +1,37 @@
-import Footer from "./components/footer";
-import Sidebar from "./components/Sidebar";
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/footer"; 
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Resturents from "./pages/Resturents";
-import Header from "./components/Header";
 import About from "./pages/About";
-import Admin from "./pages/Admin";
-import { Route, Routes } from "react-router-dom";
 
+// Admin Imports
+import AdminLayout from "./pages/AdminLayout";
+import Dashboard from "./pages/Dashboard"; 
+import CreateRestaurant from "./pages/CreateRestaurant";
+import ManageRestaurant from "./pages/ManageRestaurant";
+import EditRestaurant from "./pages/edit-restaurant"; // LA SAXAY
 
 function App() {
   return (
     <div>
-      <Header />
-
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/resturents" element={<Resturents />} />
-        <Route path="/admin" element={<Admin />} />
-      </Routes>
+        <Route path="/" element={<><Header /><Home /><Footer /></>} />
+        <Route path="/about" element={<><Header /><About /><Footer /></>} />
+        <Route path="/contact" element={<><Header /><Contact /><Footer /></>} />
+        <Route path="/resturents" element={<><Header /><Resturents /><Footer /></>} />
 
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<Dashboard />} /> 
+          <Route path="create-restaurant" element={<CreateRestaurant />} />
+          <Route path="manage-restaurant" element={<ManageRestaurant />} />
+          <Route path="edit-restaurant/:id" element={<EditRestaurant />} /> 
+        </Route>
+      </Routes>
     </div>
-  )
+  );
 }
 
-
 export default App;
-
-
-
