@@ -12,7 +12,8 @@ import AdminLayout from "./pages/AdminLayout";
 import Dashboard from "./pages/Dashboard"; 
 import CreateRestaurant from "./pages/CreateRestaurant";
 import ManageRestaurant from "./pages/ManageRestaurant";
-import EditRestaurant from "./pages/edit-restaurant"; // LA SAXAY
+import EditRestaurant from "./pages/edit-restaurant"; 
+import ReviewMessages from "./pages/Reviewmessages";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="create-restaurant" element={<CreateRestaurant />} />
           <Route path="manage-restaurant" element={<ManageRestaurant />} />
           <Route path="edit-restaurant/:id" element={<EditRestaurant />} /> 
+          <Route path="review-messages" element={<ReviewMessages />} />
         </Route>
       </Routes>
     </div>

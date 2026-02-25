@@ -1,11 +1,103 @@
-
+import React from "react";
+import { UtensilsCrossed, Facebook, Instagram, Twitter, Mail } from 'lucide-react';
 
 function Footer() {
-    return (
-        <div>
-            <h1>Footer</h1>
+  return (
+    <footer className="bg-[#0f0f14] text-gray-300 mt-20">
+      {/* Newsletter Section */}
+      <div className="text-center py-14 px-6 border-b border-gray-800">
+        <h2 className="text-3xl font-bold text-white tracking-tight">
+          Get the <span className="text-orange-500">Latest Flavors</span>
+        </h2>
+        <p className="text-gray-400 mt-3 text-sm font-medium">
+          Sign up to receive discounts and updates on new restaurants.
+        </p>
+
+        <div className="mt-8 flex justify-center max-w-md mx-auto">
+          <div className="relative w-full flex">
+             <input
+              type="email"
+              placeholder="Enter your email address..."
+              className="px-5 py-4 w-full bg-gray-900 border border-gray-800 rounded-l-2xl focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm transition-all"
+            />
+            <button className="bg-orange-600 hover:bg-orange-700 px-8 py-4 rounded-r-2xl text-white text-sm font-black transition-all shadow-lg shadow-orange-900/20 active:scale-95">
+              Subscribe
+            </button>
+          </div>
         </div>
-    )
+      </div>
+
+      {/* Links Section */}
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 py-16 px-6 text-sm">
+        
+        {/* Brand Section */}
+        <div className="space-y-4">
+          <div className="flex items-center gap-2">
+            <div className="bg-orange-500 p-2 rounded-xl">
+               <UtensilsCrossed className="text-white" size={24} />
+            </div>
+            <h3 className="text-white text-2xl font-black tracking-tighter">
+              Local<span className="text-orange-500">Food</span>
+            </h3>
+          </div>
+          <p className="text-gray-400 leading-relaxed font-medium">
+            Bringing you the authentic flavors of your community. Order quality food from the comfort of your home.
+          </p>
+          
+          {/* Functional Social Icons */}
+          <div className="flex gap-4 pt-2">
+            <a href="https://facebook.com/kingMaalid" target="_blank" rel="noopener noreferrer" className="hover:text-orange-500 transition-colors">
+              <Facebook size={20} />
+            </a>
+            <a href="https://instagram.com/king_maalid" target="_blank" rel="noopener noreferrer" className="hover:text-orange-500 transition-colors">
+              <Instagram size={20} />
+            </a>
+            <a href="https://twitter.com/king_maalid" target="_blank" rel="noopener noreferrer" className="hover:text-orange-500 transition-colors">
+              <Twitter size={20} />
+            </a>
+            <a href="mailto:macaadaxmed5252@gmail.com" className="hover:text-orange-500 transition-colors">
+              <Mail size={20} />
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 className="text-white font-bold text-base mb-6 border-l-4 border-orange-500 pl-3">Explore</h4>
+          <ul className="space-y-3 font-medium">
+            <li><a href="#" className="hover:text-orange-500 transition-colors">Browse Restaurants</a></li>
+            <li><a href="#" className="hover:text-orange-500 transition-colors">Popular Foods</a></li>
+            <li><a href="#" className="hover:text-orange-500 transition-colors">Special Offers</a></li>
+            <li><a href="#" className="hover:text-orange-500 transition-colors">Discounts</a></li>
+          </ul>
+        </div>
+
+        {/* Support Links */}
+        <div>
+          <h4 className="text-white font-bold text-base mb-6 border-l-4 border-orange-500 pl-3">Support</h4>
+          <ul className="space-y-3 font-medium">
+            <li><a href="#" className="hover:text-orange-500 transition-colors">Help Center</a></li>
+            <li><a href="#" className="hover:text-orange-500 transition-colors">FAQs</a></li>
+            <li><a href="#" className="hover:text-orange-500 transition-colors">Payment Methods</a></li>
+            <li><a href="#" className="hover:text-orange-500 transition-colors">Shipping Info</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="text-white font-bold text-base mb-6 border-l-4 border-orange-500 pl-3">Company</h4>
+          <ul className="space-y-3 font-medium">
+            <li><a href="/about" className="hover:text-orange-500 transition-colors">About Us</a></li>
+            <li><a href="#" className="hover:text-orange-500 transition-colors">Become a Partner</a></li>
+            <li><a href="/contact" className="hover:text-orange-500 transition-colors">Contact Us</a></li>
+            <li><a href="/resturents" className="hover:text-orange-500 transition-colors">Resturent</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="border-t border-gray-800/50 bg-[#0a0a0e] text-center py-8 text-xs text-gray-500 font-medium">
+        <p>© 2026 <span className="text-gray-400 font-bold">LocalFood</span>. All rights reserved.</p>
+      </div>
+    </footer>
+  );
 }
 
 export default Footer;

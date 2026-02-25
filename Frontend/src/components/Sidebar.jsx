@@ -28,6 +28,11 @@ function Sidebar() {
       icon: <Utensils size={22} /> 
     },
     { 
+      path: "/admin/review-messages", 
+      label: "Review Messages", 
+      icon: <Utensils size={22} /> 
+    },
+    { 
       path: "/admin/settings", 
       label: "Settings", 
       icon: <Settings size={22} /> 
