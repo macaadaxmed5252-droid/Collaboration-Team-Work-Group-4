@@ -18,7 +18,7 @@ app.use("/menu", MenuRouter);
 app.use("/reviews", ReviewRouter);
 
 
-// ... koodkaaga kale
+
 
 app.use("/Images", express.static(path.join(__dirname, 'Images')));
 
