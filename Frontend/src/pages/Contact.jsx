@@ -1,14 +1,9 @@
-import { useState } from "react";
+import { useState } from "react"; 
 import axios from "axios";
 import { MapPin, Phone, Mail, Send } from "lucide-react";
 
 const Contact = () => {
-  const [contact, setContact] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-
+  const [contact, setContact] = useState({ name: "", email: "", message: "" });
   const [success, setSuccess] = useState("");
 
   const handleChange = (e) => {
@@ -29,92 +24,108 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-50 flex items-center justify-center px-6 py-12">
-      <div className="max-w-7xl w-full bg-white rounded-3xl shadow-xl p-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 relative">
-          <div className="hidden md:block absolute left-1/2 top-0 h-full w-px bg-gray-200"></div>
+    <div className="min-h-[80vh] bg-gray-50 flex items-center justify-center px-6 py-16">
+      <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-12">
 
-          {/* LEFT SIDE – INFORMATION & MAP */}
-          <div className="pr-0 md:pr-12">
-            <h2 className="text-3xl font-bold mb-3">Information</h2>
-            <p className="text-gray-500 mb-10 leading-relaxed">
-              For any questions or help, feel free to reach out. We are available 7 days a week.
+        {/* LEFT SIDE – INFORMATION */}
+        <div className="bg-white shadow-xl rounded-2xl p-10 flex flex-col justify-between border-l-8 border-orange-500">
+          <div>
+            <h2 className="text-4xl font-extrabold text-black mb-5">Contact Information</h2>
+            <p className="text-gray-500 mb-10 text-base leading-relaxed">
+              Have questions or need help? Reach out to us anytime — we are here 7 days a week.
             </p>
 
-            <div className="space-y-8">
-              {/* Address */}
-              <div className="flex items-start gap-5">
-                <div className="bg-red-100 p-4 rounded-2xl"><MapPin className="text-red-500" /></div>
-                <div>
-                  <h4 className="font-semibold text-lg">Address</h4>
-                  <p className="text-gray-500">Mogadishu, Somalia</p>
+            {/* Contact Details */}
+            <div className="space-y-6">
+              {[
+                {
+                  icon: <MapPin size={24} className="text-orange-500" />,
+                  title: "Address",
+                  text: "Mogadishu, Somalia",
+                  link: null,
+                },
+                {
+                  icon: <Phone size={24} className="text-orange-500" />,
+                  title: "Call Us",
+                  text: "+252 770895033",
+                  link: "https://wa.me/252614395252",
+                },
+                {
+                  icon: <Mail size={24} className="text-orange-500" />,
+                  title: "Email Us",
+                  text: "Mufakar2002@gmail.com",
+                  link: "Mufakar2002@gmail.com",
+                },
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-center gap-4">
+                  <div className="bg-orange-50 p-3 flex items-center justify-center rounded-lg">
+                    {item.icon}
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-black">{item.title}</h4>
+                    {item.link ? (
+                      <a
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 text-sm hover:text-orange-600 transition"
+                      >
+                        {item.text}
+                      </a>
+                    ) : (
+                      <p className="text-gray-400 text-sm">{item.text}</p>
+                    )}
+                  </div>
                 </div>
-              </div>
-
-              {/* WhatsApp Link */}
-              <a 
-                href="https://wa.me/252770895033" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="flex items-start gap-5 group"
-              >
-                <div className="bg-red-100 p-4 rounded-2xl group-hover:bg-red-200 transition">
-                  <Phone className="text-red-500" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-lg">WhatsApp</h4>
-                  <p className="text-gray-500 group-hover:text-red-600 transition">+252 770895033</p>
-                </div>
-              </a>
-
-              {/* Gmail Link */}
-              <a 
-                href="mailto:Mufakar2002@gmail.com" 
-                className="flex items-start gap-5 group"
-              >
-                <div className="bg-red-100 p-4 rounded-2xl group-hover:bg-red-200 transition">
-                  <Mail className="text-red-500" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-lg">Email</h4>
-                  <p className="text-gray-500 group-hover:text-red-600 transition">Mufakar2002@gmail.com</p>
-                </div>
-              </a>
-            </div>
-
-            {/* MAP SECTION */}
-            <div className="mt-10 rounded-2xl overflow-hidden shadow-md">
-              <iframe
-                title="map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127595.04834863336!2d45.2443657!3d2.0469343!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3d58425955099395%3A0x6336338e55e5b38a!2sMogadishu%2C%20Somalia!5e0!3m2!1sen!2s!4v1710000000000"
-                className="w-full h-64 border-0"
-                loading="lazy"
-              ></iframe>
+              ))}
             </div>
           </div>
 
-          {/* RIGHT SIDE – FORM */}
-          <div className="pl-0 md:pl-12">
-            <h2 className="text-3xl font-bold mb-8">Send Us a Message</h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <input
-                type="text"
-                name="name"
-                placeholder="Full Name"
-                value={contact.name}
-                onChange={handleChange}
-                required
-                className="w-full px-5 py-4 rounded-xl bg-gray-100 focus:bg-white focus:ring-2 focus:ring-red-500 outline-none transition"
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="Email Address"
-                value={contact.email}
-                onChange={handleChange}
-                required
-                className="w-full px-5 py-4 rounded-xl bg-gray-100 focus:bg-white focus:ring-2 focus:ring-red-500 outline-none transition"
-              />
+          {/* Map Section */}
+          <div className="mt-12">
+            <div className="flex justify-between items-center mb-3">
+              <span className="font-semibold text-black text-sm">Our Location</span>
+              <span className="bg-orange-50 text-orange-600 text-xs font-bold px-3 py-1 uppercase tracking-wider rounded-full">
+                Map
+              </span>
+            </div>
+            <div className="mt-6 rounded-xl overflow-hidden shadow-lg">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11554.178230945108!2d45.3202!3d2.0469!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3d58400e16b1b1fd%3A0x8f4db24d1c5fdbf0!2sMogadishu%2C%20Somalia!5e0!3m2!1sen!2sus!4v1708796800000!5m2!1sen!2sus"
+                width="100%"
+                height="220"
+                className="rounded-xl"
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT SIDE – FORM */}
+        <div className="bg-white shadow-xl rounded-2xl p-10 border-r-8 border-orange-500">
+          <h2 className="text-4xl font-extrabold text-black mb-8">Send Us a Message</h2>
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {["name", "email"].map((field, idx) => (
+              <div key={idx}>
+                <label className="block text-sm font-semibold text-black mb-1">
+                  {field === "name" ? "Full Name" : "Email Address"}
+                </label>
+                <input
+                  type={field === "email" ? "email" : "text"}
+                  name={field}
+                  placeholder={field === "name" ? "Enter your name" : "email@example.com"}
+                  value={contact[field]}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-5 py-3 bg-gray-50 border border-gray-300 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 outline-none transition text-gray-700 placeholder:text-gray-400 rounded-lg shadow-sm"
+                />
+              </div>
+            ))}
+
+            <div>
+              <label className="block text-sm font-semibold text-black mb-1">Message</label>
               <textarea
                 name="message"
                 rows="5"
@@ -122,24 +133,23 @@ const Contact = () => {
                 value={contact.message}
                 onChange={handleChange}
                 required
-                className="w-full px-5 py-4 rounded-xl bg-gray-100 focus:bg-white focus:ring-2 focus:ring-red-500 outline-none transition"
+                className="w-full px-5 py-3 bg-gray-50 border border-gray-300 focus:border-orange-500 focus:ring-1 focus:ring-orange-500 outline-none transition text-gray-700 placeholder:text-gray-400 resize-none rounded-lg shadow-sm"
               ></textarea>
+            </div>
 
-              {success && (
-                <p className={`font-medium ${success.includes("Failed") ? "text-red-600" : "text-green-600"}`}>
-                  {success}
-                </p>
-              )}
+            {success && (
+              <p className={`text-sm font-medium ${success.includes("Failed") ? "text-red-600" : "text-green-600"}`}>
+                {success}
+              </p>
+            )}
 
-              <button
-                type="submit"
-                className="w-full flex items-center justify-center gap-3 bg-red-600 hover:bg-red-700 text-white py-4 rounded-xl font-semibold text-lg shadow-lg transition"
-              >
-                <Send size={20} />
-                Send Message
-              </button>
-            </form>
-          </div>
+            <button
+              type="submit"
+              className="w-full flex items-center justify-center gap-5 bg-orange-600 hover:bg-orange-700 text-white py-3 mt-20 font-semibold tracking-wide shadow-md transition-all duration-300 active:scale-95 rounded-lg"
+            >
+              SEND MESSAGE <Send size={18} />
+            </button>
+          </form>
         </div>
       </div>
     </div>
