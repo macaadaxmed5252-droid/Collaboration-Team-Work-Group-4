@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const ResturentRouter = require("./Router/ResturentRouter");
 const UserRouter = require("./Router/UserRouter");
 const MenuRouter = require("./Router/MenuRouter");
+const ReviewRouter = require("./Router/reviewRoutes");
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(express.json());
 app.use("/Resturant", ResturentRouter);
 app.use("/User", UserRouter);
 app.use("/menu", MenuRouter); 
+app.use("/reviews", ReviewRouter);
 
 mongoose.connect("mongodb://127.0.0.1:27017/GroupProject")
     .then(() => {
