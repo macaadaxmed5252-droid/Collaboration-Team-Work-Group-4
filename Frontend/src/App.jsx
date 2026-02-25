@@ -13,6 +13,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import RestaurantDetails from "./pages/RestaurantDetails";
 import AdminLogin from "./pages/AdminLogin";
 import AdminSignup from "./pages/AdminSignup"; // Add this
+import Favorites from "./pages/Favorites"; // Add this
 
 // Admin Imports
 import AdminLayout from "./pages/AdminLayout";
@@ -23,6 +24,9 @@ import EditRestaurant from "./pages/edit-restaurant";
 import ReviewMessages from "./pages/Reviewmessages";
 import ManageUsers from "./pages/ManageUsers";
 import MenuManagement from "./pages/MenuManagement";
+import ManageSubscriptions from "./pages/ManageSubscriptions"; // Add this
+import AdminProfile from "./pages/AdminProfile"; // Add this
+import ManageContacts from "./pages/ManageContacts"; // Add this
 
 function App() {
   return (
@@ -38,6 +42,7 @@ function App() {
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/admin-signup" element={<AdminSignup />} />
         <Route path="/profile" element={<><Header /><Profile /><Footer /></>} />
+        <Route path="/favorites" element={<><Header /><Favorites /><Footer /></>} />
 
         {/* Protected Admin Routes */}
         <Route element={<ProtectedRoute role="admin" />}>
@@ -49,6 +54,9 @@ function App() {
             <Route path="review-messages" element={<ReviewMessages />} />
             <Route path="manage-users" element={<ManageUsers />} />
             <Route path="menu-management" element={<MenuManagement />} />
+            <Route path="manage-subscriptions" element={<ManageSubscriptions />} />
+            <Route path="manage-contacts" element={<ManageContacts />} />
+            <Route path="profile" element={<AdminProfile />} />
           </Route>
         </Route>
       </Routes>

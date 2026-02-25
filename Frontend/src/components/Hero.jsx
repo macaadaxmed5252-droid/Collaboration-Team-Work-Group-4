@@ -12,7 +12,8 @@ function Hero({ onSearch }) {
         const fetchLocations = async () => {
             try {
                 const res = await api.get("/Resturant");
-                const cities = [...new Set(res.data.map((item) => item.location))];
+                const restaurants = Array.isArray(res.data) ? res.data : [];
+                const cities = [...new Set(restaurants.map((item) => item.location || item.city).filter(Boolean))];
                 setLocations(cities);
             } catch (error) {
                 console.error("Error fetching locations:", error);

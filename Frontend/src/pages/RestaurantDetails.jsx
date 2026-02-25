@@ -49,7 +49,7 @@ function RestaurantDetails() {
     };
 
     const toggleFavorite = async () => {
-        if (!user) return Swal.fire("Login Required", "Fadlan soo gal si aad u save-gareyso", "warning");
+        if (!user) return Swal.fire("Login Required", "Fadlan marka hore soo gal nidaamka si aad u calaamadsato (favorite) makhaayadaha!", "warning");
         try {
             const res = await api.post("/User/favorite", { userId: user.id, restaurantId: id });
             setIsFavorite(!isFavorite);
@@ -66,7 +66,7 @@ function RestaurantDetails() {
 
     const handleReview = async (e) => {
         e.preventDefault();
-        if (!user) return Swal.fire("Login Required", "Fadlan soo gal si aad review u qorto", "warning");
+        if (!user) return Swal.fire("Login Required", "Fadlan marka hore soo gal nidaamka si aad u rate-gareyso makhaayadaha!", "warning");
         try {
             await api.post("/Review", { restaurantId: id, userId: user.id, rating, comment });
             setComment("");

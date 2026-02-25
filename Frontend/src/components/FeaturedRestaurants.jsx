@@ -34,7 +34,8 @@ function FeaturedRestaurants({ searchTerms }) {
 
         if (searchTerms.location) {
             results = results.filter(res =>
-                res.location.toLowerCase() === searchTerms.location.toLowerCase()
+                (res.location || "").toLowerCase().includes(searchTerms.location.toLowerCase()) ||
+                (res.city || "").toLowerCase().includes(searchTerms.location.toLowerCase())
             );
         }
 

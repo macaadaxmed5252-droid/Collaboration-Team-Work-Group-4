@@ -15,7 +15,8 @@ function ManageUsers() {
     const fetchUsers = async () => {
         try {
             const res = await api.get("/User");
-            setUsers(res.data.users);
+            const data = res.data?.users || (Array.isArray(res.data) ? res.data : []);
+            setUsers(data);
         } catch (err) {
             console.error(err);
         } finally {
@@ -45,10 +46,15 @@ function ManageUsers() {
         }
     };
 
-    const filteredUsers = users.filter(u =>
-        u.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        u.email.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filteredUsers = users.filter(u => {
+        const search = searchTerm.toLowerCase();
+        return (
+            (u.fullName || "").toLowerCase().includes(search) ||
+            (u.email || "").toLowerCase().includes(search) ||
+            (u.username || "").toLowerCase().includes(search) ||
+            (u.phone || "").toLowerCase().includes(search)
+        );
+    });
 
     if (loading) return <div className="p-8 text-center"><Loader2 className="animate-spin text-orange-600 mx-auto" size={48} /></div>;
 

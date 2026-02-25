@@ -8,7 +8,8 @@ import {
   LogOut,
   User,
   Users,
-  MessageSquare
+  MessageSquare,
+  Mail
 } from "lucide-react";
 import { IMAGE_BASE_URL } from "../api/config";
 
@@ -19,7 +20,7 @@ function Sidebar() {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
-    navigate("/login");
+    navigate("/");
   };
 
   const menuItems = [
@@ -53,6 +54,21 @@ function Sidebar() {
       label: "Manage Reviews",
       icon: <MessageSquare size={22} />
     },
+    {
+      path: "/admin/manage-subscriptions",
+      label: "Subscriptions",
+      icon: <Mail size={22} />
+    },
+    {
+      path: "/admin/manage-contacts",
+      label: "Messages",
+      icon: <MessageSquare size={22} />
+    },
+    {
+      path: "/admin/profile",
+      label: "Profile Settings",
+      icon: <Settings size={22} />
+    },
   ];
 
   return (
@@ -62,7 +78,7 @@ function Sidebar() {
           <div className="w-10 h-10 bg-orange-600 rounded-xl flex items-center justify-center shadow-lg shadow-orange-200">
             <Utensils className="text-white" size={24} />
           </div>
-          <span className="text-xl font-bold text-gray-800 tracking-tight">Admin<span className="text-orange-600">Panel</span></span>
+          <span className="text-xl font-bold text-gray-800 tracking-tight">Super<span className="text-orange-600">Admin</span></span>
         </Link>
       </div>
 
@@ -101,8 +117,8 @@ function Sidebar() {
               )}
             </div>
             <div className="flex-1 overflow-hidden">
-              <p className="font-bold text-gray-900 text-sm truncate">{user.fullName}</p>
-              <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{user.role}</p>
+              <p className="font-bold text-gray-900 text-sm truncate">{user.fullName || user.username}</p>
+              <p className="text-[10px] font-black text-orange-600 uppercase tracking-widest">Super Admin</p>
             </div>
           </div>
         )}

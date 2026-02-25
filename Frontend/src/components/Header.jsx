@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Home, Info, Phone, Utensils, LayoutDashboard, Menu, X, Search, LogIn, User, LogOut } from "lucide-react";
+import { Home, Info, Phone, Utensils, LayoutDashboard, Menu, X, Search, LogIn, User, LogOut, Heart } from "lucide-react";
 import { IMAGE_BASE_URL } from "../api/config";
 
 function Header() {
@@ -16,13 +16,14 @@ function Header() {
     const handleLogout = () => {
         localStorage.removeItem("user");
         setUser(null);
-        navigate("/login");
+        navigate("/");
     };
 
     const menuItems = [
         { to: "/", label: "Home", icon: <Home size={20} /> },
         { to: "/about", label: "About", icon: <Info size={20} /> },
         { to: "/resturents", label: "Restaurants", icon: <Utensils size={20} /> },
+        { to: "/favorites", label: "Favorites", icon: <Heart size={20} /> }, // Add this
         { to: "/contact", label: "Contact", icon: <Phone size={20} /> },
     ];
 

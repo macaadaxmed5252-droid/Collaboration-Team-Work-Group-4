@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const path = require('path'); // Hubi inuu halkan joogo
+const path = require('path');
 
 const ResturentRouter = require("./Router/ResturentRouter");
 const UserRouter = require("./Router/UserRouter");
@@ -17,8 +17,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// 2. static folder - Kan soo hor mari Router-ka (MUHIIM)
-// Waxaan hubinaa inuu garto folder-ka "Images" ee root-ka ku yaalla
+// 2. static folder
 app.use("/Images", express.static(path.join(__dirname, 'Images')));
 
 // 3. Router-yada

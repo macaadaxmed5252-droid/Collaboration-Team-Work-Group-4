@@ -4,11 +4,10 @@ const RestaurantModel = require("../Model/RestaurantModel");
 // ✅ Add Review
 const CreateReview = async (req, res) => {
     try {
-        // userId-ga waxaan ka soo qaadanaynaa body-ga si looga fogaado error-ka 'undefined'
         const { restaurantId, rating, comment, userId } = req.body;
 
         if (!userId) {
-            return res.status(400).json({ message: "Fadlan soo geli userId-ga qofka review-ga qoraya" });
+            return res.status(401).json({ message: "Fadlan marka hore is-diiwaangeli ama soo gal nidaamka si aad u rate-gareyso!" });
         }
 
         const restaurant = await RestaurantModel.findById(restaurantId);
