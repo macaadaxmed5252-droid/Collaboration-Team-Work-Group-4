@@ -13,6 +13,7 @@ const CreateResturant = async (req, res) => {
             location: req.body.location,
             city: req.body.city,
             category: req.body.category,
+            averageRating: req.body.averageRating,
             Image: req.file.filename 
         });
 
