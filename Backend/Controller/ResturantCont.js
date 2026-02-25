@@ -10,7 +10,7 @@ const CreateResturant = async (req, res) => {
         const newResturant = await RestaurantModel.create({
             name: req.body.name,
             description: req.body.description,
-            address: req.body.address,
+            location: req.body.location,
             city: req.body.city,
             category: req.body.category,
             Image: req.file.filename 
