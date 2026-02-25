@@ -10,6 +10,10 @@ app.use(express.json());
 app.use("/Resturant", ResturentRouter);
 app.use("/User", UserRouter)
 
+const menuRouter= require("./Router/MenuRouter");
+app.use("/menu", menuRouter);
+
+
 mongoose.connect("mongodb://127.0.0.1:27017/GroupProject")
     .then(() => {
         console.log("Connected to MongoDB");
