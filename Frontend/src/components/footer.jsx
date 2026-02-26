@@ -30,7 +30,6 @@ function Footer() {
 
   return (
     <footer className="bg-[#0f0f14] text-gray-300 mt-20">
-      {/* Newsletter Section */}
       <div className="text-center py-14 px-6 border-b border-gray-800">
         <h2 className="text-3xl font-bold text-white tracking-tight">
           Get the <span className="text-orange-500">Latest Flavors</span>
@@ -77,7 +76,7 @@ function Footer() {
             Bringing you the authentic flavors of your community. Order quality food from the comfort of your home.
           </p>
 
-          {/* Functional Social Icons */}
+       
           <div className="flex gap-4 pt-2">
             <a href="https://facebook.com/kingMaalid" target="_blank" rel="noopener noreferrer" className="hover:text-orange-500 transition-colors">
               <Facebook size={20} />
@@ -104,7 +103,7 @@ function Footer() {
           </ul>
         </div>
 
-        {/* Support Links */}
+    
         <div>
           <h4 className="text-white font-bold text-base mb-6 border-l-4 border-orange-500 pl-3">Support</h4>
           <ul className="space-y-3 font-medium">
