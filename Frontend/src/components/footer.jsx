@@ -59,10 +59,9 @@ function Footer() {
         </form>
       </div>
 
-      {/* Links Section */}
+      
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 py-16 px-6 text-sm">
 
-        {/* Brand Section */}
         <div className="space-y-4">
           <div className="flex items-center gap-2">
             <div className="bg-orange-500 p-2 rounded-xl">
